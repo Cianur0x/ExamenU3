@@ -1,0 +1,110 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <title>Crear Pelicula</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+          integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+</head>
+<body>
+<div class=" d-flex justify-content-center">
+    <div class="w-25">
+        <form th:action="@{/peliculas/crear}" th:object="${peliculaForm}" method="post">
+            <div class="form-group">
+                <label for="title" th:text="#{titulo}"></label>
+                <input type="text" class="form-control" id="title" th:field="*{titulo}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('titulo')}">
+                    <li th:each="err : ${#fields.errors('titulo')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="des" th:text="#{des}"></label>
+                <input type="text" class="form-control" id="des" th:field="*{descipcion}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('descipcion')}">
+                    <li th:each="err : ${#fields.errors('descipcion')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="fechaLanza" th:text="#{fechaL}"></label>
+                <input type="date" class="form-control" id="fechaLanza" th:field="*{fechaLanzamiento}"
+                >
+                <ul class="text-danger" th:if="${#fields.hasErrors('fechaLanzamiento')}">
+                    <li th:each="err : ${#fields.errors('fechaLanzamiento')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="ape1" th:text="#{idioma}"></label>
+                <select class="custom-select" aria-label="Default select example" th:field="*{idIdioma}">
+                    <option th:each="idioma :${idiomas}"
+                            th:value="${idioma.idIdioma}"
+                            th:text="${'Id: ' + idioma.idIdioma + ' - ' + idioma.nombre}"
+                    ></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="ape1" th:text="#{categoria}"></label>
+                <select class="custom-select" aria-label="Default select example" th:field="*{idCategoria}">
+
+                    <option th:each="cat:${categorias}"
+                            th:value="${cat.idCat}"
+                            th:text="${'Id: ' + cat.idCat + ' - ' + cat.nombre}"
+                    ></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id" th:text="#{duracionalqui}">ID</label>
+                <input type="text" class="form-control" id="id" th:field="*{duracionAlquiler}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('duracionAlquiler')}">
+                    <li th:each="err : ${#fields.errors('duracionAlquiler')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="nombre" th:text="#{renta}"></label>
+                <input type="text" class="form-control" id="nombre" th:field="*{rentalRate}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('rentalRate')}">
+                    <li th:each="err : ${#fields.errors('rentalRate')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="ape1" th:text="#{duracion}"></label>
+                <input type="text" class="form-control" id="ape1" th:field="*{duracion}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('duracion')}">
+                    <li th:each="err : ${#fields.errors('duracion')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="remplazo" th:text="#{replace}">ID</label>
+                <input type="text" class="form-control" id="remplazo" th:field="*{replacementCost}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('replacementCost')}">
+                    <li th:each="err : ${#fields.errors('replacementCost')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <button th:href="@{/pedidos}" class="btn btn-info"><i class="fas fa-arrow-left  "></i>
+                <th:block th:text="#{btnVolver}"></th:block>
+            </button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane  "></i>
+                <th:block th:text="#{btnEnviar}"></th:block>
+            </button>
+        </form>
+    </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
